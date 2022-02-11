@@ -20,3 +20,11 @@ THEN I exit the application, and the HTML is generated
 Use Jest and Inquire
 
 Video walkthrough required
+
+must have: classes for Employee, Manager, Engineer, Intern, must have tests for all
+Employee has name, id, email, getName(), getId(), getEmail(), getRole() the role will be employee
+Manager will also have officeNumber, getRole(), will oeride to return 'Manager'
+Engineer will have github username, getGitHub() and getRole() will override to return 'Engineer'
+Intern will have school, getSchool(), getRole) will override to return 'Intern'
+
+have some validation
