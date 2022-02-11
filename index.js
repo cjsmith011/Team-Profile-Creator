@@ -1,17 +1,45 @@
-const { writeFile, copyFile } = require('./src/generate-page');
+const { writeFile } = require('./src/generate-page');
 const generatePage = require(`./src/page-template`);
 const inquirer = require(`inquirer`);
-const promptEmployee = employeeData => {
+const promptManager = () => {
+    console.log(`
+    =============================
+       Let's build a team!       
+    =============================`);
+        
     return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'manager',
+            message: 'What is the name of the manager of the team?',
+        }
+    ]);
+};
+
+const promptEmployee = employeeData => {
+        console.log(`
+        =============================
+             Now for the details!      
+        =============================`);
+        if (!employeeData.details) {
+            employeeData.details =  [];
+            }
+        return inquirer
+        .prompt([
+        {
+            type: 'checkbox',
+            name: 'role',
+            choices: ['Manager', 'Engineer', 'Intern', 'Employee (none of above)'],
+        },
         {
             type: `input`,
             name: `name`,
             message: `What is the employee name?`,
-            validate: nameInput => {
-                if (nameInput) {
+            validate: employeenameInput => {
+                if (employeenameInput) {
                     return true;
                 } else {
-                    console.log('Please share your name!');
+                    console.log('We definitely require a name!');
                     return false;
                 }
             }
@@ -32,12 +60,7 @@ const promptEmployee = employeeData => {
         {
             type: `input`,
             name: `email`,
-            message: `What is the employee's email address`,
-        },
-        {
-            type: 'checkbox',
-            name: 'role',
-            choices: ['Manager', 'Engineer', 'Intern', 'Employee (none of above)'],
+            message: `What is the employee's email address?`,
         },
         {
             type: 'confirm',
@@ -92,13 +115,31 @@ const promptEmployee = employeeData => {
                     return false;
                 }
             }
+        },
+        {
+            type: 'confirm',
+            name: 'confirmAddEmployee',
+            message: 'Would you like to add another employee for this team?',
+            default: false
         }
-    ]);
+    ])
+        .then(profileData => {
+            employeeData.details.push(profileData);
+            if (profileData.confirmAddEmployee) {
+                return promptEmployee(employeeData);
+            } else {
+                return employeeData;
+            }
+        });
 };
 
 
 
-promptEmployee()
+promptManager()
+    .then(promptEmployee)
+    .then(employeeData => {
+        return generatePage(employeeData);
+    })
      .then (pageHTML => {
         return writeFile(pageHTML);
     })
