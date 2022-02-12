@@ -13,7 +13,7 @@ const writeFile = fileContent => {
             //if it worked, resolve the promise and let the user know
             resolve({
                 ok: true,
-                message: 'File created, yay!'
+                message: 'Your team is built!  Go to dist/index.html and launch in your browser!'
             });
         });
     });

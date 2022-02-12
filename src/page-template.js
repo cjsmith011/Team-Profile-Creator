@@ -1,48 +1,53 @@
 
-
+const { template } = require("lodash");
 const generateManager = managerText => {
     if (!managerText) {
         return '';
     }
      return `
-     <section class="my-3" id="about">
-      <h2 class="text-dark bg-primary p-2 display-inline-block">About Me</h2>
-      <p>${managerText}</p>
-    </section>
+     <section class="section">
+      <h2 class="title is-2">Team Manager: ${managerText}</h2>
+     </section>
   `;
 };
 
-const generateTeam = employeesArr => {
+const generateTeam = detailsArr => {
     return `
-    <section class="my-3" id="portfolio">
-      <h2 class="text-dark bg-primary p-2 display-inline-block">Work</h2>
-      <div class="flex-row justify-space-between">
-      ${employeesArr
-        .map(({ name, id, email }) => {
+    <section class="section">
+      <h2 class="has-text-primary>Team Members:</h2>
+      
+      ${detailsArr
+        .map(({ role, name, id, email, github, office, school }) => {
+          // if (!github, !office, !school) {
+          //   return '';
+          // }
           return `
-          <div class="col-12 mb-2 bg-dark text-light p-3">
-            <h3 class="portfolio-item-title text-light">${name}</h3>
-            <h5 class="portfolio-languages">
-              Built With:
-              ${id.join(', ')}
-            </h5>
-            <p>${description}</p>
-            <a href="${link}" class="btn"><i class="fab fa-github mr-2"></i>View Project on GitHub</a>
+          <div class="card">
+          <header class="card-header">
+          <p class-"card-header-title">Team Mamber</p>
+          <div class="card-content">
+            <p class="subtitle is-3>${role}</p>  
+            <p class="title is-3">${name}</p>
+            <p class="subtitle is-3>Employee id: ${id}</p>
+            <p class="subtitle is-3>Email: ${email}</p>
+            <p class="subtitle is-3>Github: https://github.com/${github}</p>
+            <p class="subtitle is-3>Office: ${office}</p>
+            <p class="subtitle is-3>School: ${school}</p>
+            </div>
           </div>
-        `;
+          `;
         })
-        .join('')}
-
-    
+      }
       </div>
-    </section>
-  `;
-};
+      </section>
+      `;
+    }
+    
 
 module.exports = templateData => {
     console.log(templateData);
     //destructure projects and about data from templateData based on their object properties
-    const { employees, manager } = templateData;
+    const { details, manager } = templateData;
 
 
     return `
@@ -52,29 +57,26 @@ module.exports = templateData => {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Portfolio Demo</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Public+Sans:300i,300,500&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <link rel="stylesheet" src="./design.css">
+        <title>Team Profile</title>
         </head>
 
         <body>
         <header>
-            <div class="container flex-row justify-space-between align-center py-3">
-             <h1 class="page-title text-secondary bg-dark py-2 px-3">${id}</h1>
-             <nav class="flex-row">
-                <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" href="https://github.com/${role}">GitHub</a>
-             </nav>
-             </div>
+        <header class="has-background-primary"></header>
+            <div>
+             <h1 class="has-background-success-light is-centered title is-2 ">Meet the Index Team!</h1>
+            </div>
         </header>
 
-        <main class="container my-5">
+        <main class>
             ${generateManager(manager)}
-            ${generateTeam(employees)}
+            ${generateTeam(details)}
         </main>
 
-        <footer class="container text-center py-3">
-            <h3 class="text-dark">&copy; ${new Date().getFullYear()} by Carlie Smith</h3>
+        <footer class="footer has-text-centered">
+            <h3 class="has-text-primary">&copy; ${new Date().getFullYear()} by Carlie Smith</h3>
         </footer>
         </body>
     </html>

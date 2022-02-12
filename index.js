@@ -4,7 +4,7 @@ const inquirer = require(`inquirer`);
 const promptManager = () => {
     console.log(`
     =============================
-       Let's build a team!       
+       First, we need a manager:       
     =============================`);
         
     return inquirer.prompt([
@@ -18,9 +18,10 @@ const promptManager = () => {
 
 const promptEmployee = employeeData => {
         console.log(`
-        =============================
-             Now for the details!      
-        =============================`);
+        ==========================================================
+            The manager will be the first employee you build. 
+            Then add the rest of the team!      
+        ==========================================================`);
         if (!employeeData.details) {
             employeeData.details =  [];
             }
