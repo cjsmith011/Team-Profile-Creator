@@ -15,5 +15,5 @@ Github page: https://cjsmith011.github.io/Team-Profile-Creator/
 
 Github repo:  https://github.com/cjsmith011/Team-Profile-Creator.git
 
-
+page image: https://github.com/cjsmith011/Team-Profile-Creator/blob/main/src/TeamProfile.png
       
