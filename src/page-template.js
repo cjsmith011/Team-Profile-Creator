@@ -12,33 +12,34 @@ const generateManager = managerText => {
 };
 
 const generateTeam = detailsArr => {
+    
     return `
     <section class="section">
-      <h2 class="has-text-primary>Team Members:</h2>
-      
+            
       ${detailsArr
         .map(({ role, name, id, email, github, office, school }) => {
-          // if (!github, !office, !school) {
-          //   return '';
-          // }
+          
           return `
           <div class="card">
           <header class="card-header">
-          <p class-"card-header-title">Team Mamber</p>
+          <p class="card-header-title title is-3">Team Member</p>
+          </header>
           <div class="card-content">
-            <p class="subtitle is-3>${role}</p>  
+            <div class="content">
             <p class="title is-3">${name}</p>
-            <p class="subtitle is-3>Employee id: ${id}</p>
-            <p class="subtitle is-3>Email: ${email}</p>
-            <p class="subtitle is-3>Github: https://github.com/${github}</p>
-            <p class="subtitle is-3>Office: ${office}</p>
-            <p class="subtitle is-3>School: ${school}</p>
+            <p class="subtitle is-5">Job role: ${role}</p> 
+            <p class="subtitle is-5">Employee id: ${id}</p>
+            <p class="subtitle is-5">Email: <a href="#">${email}</a></p>
+            <p class="subtitle is-5">Github: <a href="#">https://github.com/${github}</a></p>
+            <p class="subtitle is-5">Office: ${office}</p>
+            <p class="subtitle is-5">School: ${school}</p>
+            </div>
             </div>
           </div>
           `;
         })
       }
-      </div>
+    
       </section>
       `;
     }
